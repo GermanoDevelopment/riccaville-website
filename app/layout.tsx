@@ -1,6 +1,7 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
+import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
 const inter = Inter({
@@ -15,41 +16,75 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 })
 
+export const viewport: Viewport = {
+  themeColor: "#225A6A",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+}
+
 export const metadata: Metadata = {
-  title: "Ricca Ville Chalé - Casa de Temporada em Barra Grande, Piauí",
-  description:
-    "Viva dias inesquecíveis em nossa casa de temporada na Praia de Barra Grande - Piauí. Piscina com hidromassagem, área gourmet e muito mais.",
-  keywords: "casa de temporada, Barra Grande, Piauí, chalé, piscina, área gourmet, praia, férias, aluguel temporada",
-  authors: [{ name: "Ricca Ville Chalé" }],
-  creator: "Ricca Ville Chalé",
-  publisher: "Ricca Ville Chalé",
-  robots: "index, follow",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} - Casa de Temporada em Barra Grande, Piauí`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "casa de temporada",
+    "Barra Grande",
+    "Piauí",
+    "chalé",
+    "piscina com hidromassagem",
+    "área gourmet",
+    "hospedagem barra grande",
+    "aluguel temporada piauí",
+    "rota das emoções",
+    "kitesurf barra grande",
+  ],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.legalName,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Ricca Ville Chalé - Casa de Temporada em Barra Grande, Piauí",
-    description: "Viva dias inesquecíveis em nossa casa de temporada na Praia de Barra Grande - Piauí.",
+    title: `${siteConfig.name} - Casa de Temporada em Barra Grande, Piauí`,
+    description: siteConfig.description,
     type: "website",
     locale: "pt_BR",
-    url: "https://riccavillechale.com",
-    siteName: "Ricca Ville Chalé",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "/icone-site.svg",
+        url: siteConfig.ogImage,
         width: 1200,
-        height: 630,
-        alt: "Ricca Ville Chalé - Casa de Temporada em Barra Grande",
+        height: 800,
+        alt: `${siteConfig.name} - Vista da propriedade e piscina em Barra Grande`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ricca Ville Chalé - Casa de Temporada em Barra Grande, Piauí",
-    description: "Viva dias inesquecíveis em nossa casa de temporada na Praia de Barra Grande - Piauí.",
-    images: ["/placeholder.svg?height=630&width=1200"],
+    title: `${siteConfig.name} - Casa de Temporada em Barra Grande, Piauí`,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   alternates: {
-    canonical: "https://riccavillechale.com",
+    canonical: siteConfig.url,
   },
-  generator: "v0.app",
+  icons: {
+    icon: "/icone.svg",
+    apple: "/icone.svg",
+  },
 }
 
 export default function RootLayout({
@@ -57,15 +92,52 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Schema.org Structured Data para Google Rich Snippets
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: siteConfig.name,
+    legalName: siteConfig.legalName,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    telephone: `+55${siteConfig.contact.phoneDigits}`,
+    email: siteConfig.contact.email,
+    image: `${siteConfig.url}${siteConfig.ogImage}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Praia de Barra Grande",
+      addressLocality: "Cajueiro da Praia",
+      addressRegion: "PI",
+      postalCode: "64222-000",
+      addressCountry: "BR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.location.geo.latitude,
+      longitude: siteConfig.location.geo.longitude,
+    },
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Piscina com Hidromassagem", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Área Gourmet com Churrasqueira", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Ar-condicionado", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Estacionamento privativo para 5 carros", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Capacidade para até 10 pessoas", value: true },
+      { "@type": "LocationFeatureSpecification", name: "800m da praia", value: true },
+    ],
+  }
+
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable} antialiased`}>
+    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable} antialiased scroll-smooth`}>
       <head>
-        <link rel="icon" href="/icone.svg" />
-        <link rel="apple-touch-icon" href="/icone.svg" />
-        <meta name="theme-color" content="#4A90E2" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
-      <body className="overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden min-h-screen bg-background text-foreground selection:bg-secondary/30">
+        {children}
+      </body>
     </html>
   )
 }
