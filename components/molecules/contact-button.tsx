@@ -1,24 +1,36 @@
 "use client"
 
 import type React from "react"
-
 import { Button } from "@/components/atoms/button"
 import { MessageCircle, Phone } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 interface ContactButtonProps {
   type: "whatsapp" | "phone"
-  value: string
+  value?: string
   children?: React.ReactNode
   className?: string
   variant?: "default" | "outline" | "coastal"
 }
 
-export function ContactButton({ type, value, children, className, variant = "coastal" }: ContactButtonProps) {
+export function ContactButton({
+  type,
+  value,
+  children,
+  className,
+  variant = "coastal",
+}: ContactButtonProps) {
   const handleClick = () => {
     if (type === "whatsapp") {
-      window.open(`https://wa.me/55${value.replace(/\D/g, "")}`, "_blank")
+      const targetUrl = value
+        ? `https://wa.me/55${value.replace(/\D/g, "")}`
+        : siteConfig.contact.whatsappUrl
+      window.open(targetUrl, "_blank", "noopener,noreferrer")
     } else {
-      window.open(`tel:+55${value.replace(/\D/g, "")}`, "_blank")
+      const targetPhone = value
+        ? `tel:+55${value.replace(/\D/g, "")}`
+        : siteConfig.contact.phoneUrl
+      window.location.href = targetPhone
     }
   }
 

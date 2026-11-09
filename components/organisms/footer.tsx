@@ -4,17 +4,10 @@ import { ContactInfo } from "@/components/molecules/contact-info"
 import { NavLink } from "@/components/molecules/nav-link"
 import { Divider } from "@/components/atoms/divider"
 import { MessageCircle, Phone, Mail, Instagram, MapPin, Heart } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
-
-  const quickLinks = [
-    { href: "#sobre", label: "Sobre" },
-    { href: "#acomodacoes", label: "Acomodações" },
-    { href: "#area-lazer", label: "Área de Lazer" },
-    { href: "#galeria", label: "Galeria" },
-    { href: "#contato", label: "Contato" },
-  ]
 
   return (
     <footer className="bg-primary/5 border-t border-border">
@@ -25,39 +18,36 @@ export function Footer() {
             <Logo size="lg" className="mb-4" />
             <Text className="mb-6 max-w-md text-muted-foreground">
               Sua casa de temporada em Barra Grande - Piauí. Momentos inesquecíveis a apenas 800m do mar, com todo
-              conforto e comodidade que você merece.
+              conforto, lazer e comodidade que você merece.
             </Text>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <address className="space-y-2 text-sm text-muted-foreground not-italic">
               <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
-                Praia de Barra Grande, Piauí - Brasil
+                <MapPin className="w-4 h-4 mr-2 text-primary" />
+                {siteConfig.location.destination}
               </div>
               <div>
-                <Text variant="small" className="font-medium">
-                  Grupo RICCA CASUAL LTDA
+                <Text variant="small" className="font-medium text-foreground">
+                  {siteConfig.legalName}
                 </Text>
               </div>
               <div>
-                <Text variant="small">CNPJ: 25.463.257/0001-00</Text>
+                <Text variant="small">CNPJ: {siteConfig.cnpj}</Text>
               </div>
               <div>
-                <Text variant="small">Rua Landri Sales, 10a - Centro</Text>
+                <Text variant="small">{siteConfig.location.headquartersAddress}</Text>
               </div>
-              <div>
-                <Text variant="small">Esperantina - PI, 64.180-000</Text>
-              </div>
-            </div>
+            </address>
           </div>
 
           {/* Links Rápidos */}
           <div>
-            <Text variant="lead" className="font-semibold mb-4">
+            <Text variant="lead" className="font-semibold mb-4 text-foreground">
               Links Rápidos
             </Text>
-            <nav className="space-y-3">
-              {quickLinks.map((link) => (
+            <nav aria-label="Links rápidos do rodapé" className="space-y-3">
+              {siteConfig.navLinks.map((link) => (
                 <div key={link.href}>
-                  <NavLink href={link.href} className="text-muted-foreground hover:text-primary">
+                  <NavLink href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </NavLink>
                 </div>
@@ -67,36 +57,36 @@ export function Footer() {
 
           {/* Contato */}
           <div>
-            <Text variant="lead" className="font-semibold mb-4">
+            <Text variant="lead" className="font-semibold mb-4 text-foreground">
               Contato
             </Text>
             <div className="space-y-2">
               <ContactInfo
                 icon={MessageCircle}
                 label="WhatsApp"
-                value="86 9950-5437"
-                href="https://wa.me/558699505437"
+                value={siteConfig.contact.phoneFormatted}
+                href={siteConfig.contact.whatsappUrl}
                 className="p-0 hover:bg-transparent"
               />
               <ContactInfo
                 icon={Phone}
                 label="Telefone"
-                value="86 9950-5437"
-                href="tel:+558699505437"
+                value={siteConfig.contact.phoneFormatted}
+                href={siteConfig.contact.phoneUrl}
                 className="p-0 hover:bg-transparent"
               />
               <ContactInfo
                 icon={Mail}
                 label="E-mail"
-                value="casualricca@gmail.com"
-                href="mailto:casualricca@gmail.com"
+                value={siteConfig.contact.email}
+                href={siteConfig.contact.emailUrl}
                 className="p-0 hover:bg-transparent"
               />
               <ContactInfo
                 icon={Instagram}
                 label="Instagram"
-                value="@riccacasual"
-                href="https://instagram.com/riccacasual"
+                value={siteConfig.contact.instagram}
+                href={siteConfig.contact.instagramUrl}
                 className="p-0 hover:bg-transparent"
               />
             </div>
@@ -107,7 +97,9 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
           <div className="flex items-center mb-4 md:mb-0">
-            <Text variant="small">© {currentYear} Grupo RICCA CASUAL LTDA. Todos os direitos reservados.</Text>
+            <Text variant="small">
+              © {currentYear} {siteConfig.legalName}. Todos os direitos reservados.
+            </Text>
           </div>
           <div className="flex items-center">
             <Text variant="small">Feito com</Text>

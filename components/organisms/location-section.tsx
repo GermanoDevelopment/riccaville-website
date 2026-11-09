@@ -3,6 +3,7 @@ import { Text } from "@/components/atoms/text"
 import { Badge } from "@/components/atoms/badge"
 import { Icon } from "@/components/atoms/icon"
 import { MapPin, Car, Clock } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 export function LocationSection() {
   return (
@@ -22,12 +23,12 @@ export function LocationSection() {
                 <Icon icon={MapPin} className="text-primary" />
               </div>
               <div>
-                <Text variant="lead" className="font-semibold mb-2">
-                  Praia de Barra Grande - Piauí
+                <Text variant="lead" className="font-semibold mb-2 text-foreground">
+                  {siteConfig.location.destination}
                 </Text>
                 <Text className="text-muted-foreground">
-                  Localizado em uma das praias mais belas do litoral piauiense, com águas cristalinas e paisagens
-                  deslumbrantes.
+                  Localizado em uma das praias mais belas do litoral piauiense, famosa pelos ventos ideais para kitesurf,
+                  águas mornas e gastronomia rica.
                 </Text>
               </div>
             </div>
@@ -37,11 +38,11 @@ export function LocationSection() {
                 <Icon icon={Clock} className="text-primary" />
               </div>
               <div>
-                <Text variant="lead" className="font-semibold mb-2">
+                <Text variant="lead" className="font-semibold mb-2 text-foreground">
                   Apenas 800m do mar
                 </Text>
                 <Text className="text-muted-foreground">
-                  Caminhada tranquila de poucos minutos até a praia. Perfeito para ir e voltar quantas vezes quiser.
+                  Caminhada tranquila de poucos minutos até a praia. Perfeito para ir e voltar com tranquilidade.
                 </Text>
               </div>
             </div>
@@ -51,11 +52,11 @@ export function LocationSection() {
                 <Icon icon={Car} className="text-primary" />
               </div>
               <div>
-                <Text variant="lead" className="font-semibold mb-2">
-                  Estacionamento para 5 carros
+                <Text variant="lead" className="font-semibold mb-2 text-foreground">
+                  {siteConfig.location.parkingCapacity}
                 </Text>
                 <Text className="text-muted-foreground">
-                  Espaço seguro e coberto dentro da propriedade para toda a família e amigos.
+                  Espaço amplo e seguro dentro da propriedade para os veículos de toda a família e amigos.
                 </Text>
               </div>
             </div>
@@ -71,20 +72,20 @@ export function LocationSection() {
           </div>
 
           <div className="relative">
-            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl border border-border/50">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.661779852347!2d-41.40113742585912!3d-2.9133124970630777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ec0569c462e513%3A0xfc3b099691ea8be!2sChal%C3%A9%20Ricca%20Ville-%20Barra%20Grande%20PI!5e0!3m2!1spt-BR!2sbr!4v1755452664895!5m2!1spt-BR!2sbr"
+                src={siteConfig.location.mapsEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Localização do Ricca Ville Chalé em Barra Grande - Piauí"
+                title="Localização do Ricca Ville Chalé em Barra Grande - Piauí no Google Maps"
               />
             </div>
             <div className="absolute -bottom-4 -right-4 bg-background border border-border rounded-lg p-4 shadow-lg">
-              <Text variant="small" className="font-medium">
+              <Text variant="small" className="font-medium text-foreground">
                 Barra Grande - PI
               </Text>
               <Text variant="small" className="text-muted-foreground">
