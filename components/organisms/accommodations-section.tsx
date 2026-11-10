@@ -6,30 +6,41 @@ export function AccommodationsSection() {
     {
       title: "Quarto Térreo Triplo",
       capacity: 3,
-      description: "Quarto confortável no térreo com ar-condicionado e espaço para até 3 pessoas.",
+      description: "Quarto confortável no piso térreo, com ar-condicionado e acesso direto à área externa.",
+      imageSrc: "/images/fachada-externa.jpg",
+      imageAlt: "Quarto térreo com vista e acesso ao jardim externo",
       features: [
-        "Ar-condicionado",
-        "2 armadores para redes",
+        "Ar-condicionado potente",
+        "2 armadores para redes de dormir",
         "Colchão extra disponível",
-        "Acesso direto à área externa",
+        "Acesso fácil e sem degraus",
       ],
     },
     {
       title: "Quarto Mezanino Triplo",
       capacity: 3,
-      description: "Quarto no mezanino com vista privilegiada e ambiente aconchegante.",
+      description: "Ambiente no mezanino de madeira com vista privilegiada, brisa constante e atmosfera acolhedora.",
+      imageSrc: "/images/varanda-superior.jpg",
+      imageAlt: "Mezanino do chalé com vista panorâmica da propriedade",
       features: [
-        "Ar-condicionado",
-        "Espaço para 2 redes (trazer suas redes)",
+        "Ar-condicionado e circulação de ar",
+        "Espaço para 2 redes de descanso",
         "Colchão extra disponível",
         "Vista panorâmica da propriedade",
       ],
     },
     {
-      title: "Áreas Comuns",
+      title: "Áreas Comuns & Deck",
       capacity: 4,
-      description: "Espaços compartilhados amplos e bem equipados para toda a família.",
-      features: ["Sala de estar espaçosa", "Cozinha completa", "Banheiro social", "Deck avarandado com 7 armadores"],
+      description: "Espaços amplos integrados com sala, cozinha equipada, banheiro social e varanda com armadores.",
+      imageSrc: "/images/area-piscina-completa.jpg",
+      imageAlt: "Áreas de convivência com deck avarandado e piscina",
+      features: [
+        "Sala de estar e jantar integrada",
+        "Deck avarandado com 7 armadores",
+        "Cozinha completa para café da manhã",
+        "Banheiro social moderno",
+      ],
     },
   ]
 
@@ -39,7 +50,7 @@ export function AccommodationsSection() {
         <SectionHeader
           subtitle="Acomodações"
           title="Conforto para toda a família"
-          description="Espaços pensados para proporcionar o máximo de conforto e comodidade durante sua estadia."
+          description="Espaços pensados para proporcionar o máximo de conforto, privacidade e comodidade para até 10 pessoas."
           centered
         />
 
@@ -51,7 +62,8 @@ export function AccommodationsSection() {
               capacity={accommodation.capacity}
               features={accommodation.features}
               description={accommodation.description}
-              className="animate-slide-up"
+              imageSrc={accommodation.imageSrc}
+              imageAlt={accommodation.imageAlt}
             />
           ))}
         </div>
