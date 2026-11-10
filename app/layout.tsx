@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     "aluguel temporada piauí",
     "rota das emoções",
     "kitesurf barra grande",
+    "praia de barra grande pi",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -85,6 +86,12 @@ export const metadata: Metadata = {
     icon: "/icone.svg",
     apple: "/icone.svg",
   },
+  other: {
+    "geo.region": "BR-PI",
+    "geo.placename": "Barra Grande, Cajueiro da Praia",
+    "geo.position": `${siteConfig.location.geo.latitude};${siteConfig.location.geo.longitude}`,
+    ICBM: `${siteConfig.location.geo.latitude}, ${siteConfig.location.geo.longitude}`,
+  },
 }
 
 export default function RootLayout({
@@ -92,8 +99,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // Schema.org Structured Data para Google Rich Snippets
-  const jsonLd = {
+  // Schema.org Structured Data: LodgingBusiness
+  const lodgingSchema = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     name: siteConfig.name,
@@ -103,6 +110,7 @@ export default function RootLayout({
     telephone: `+55${siteConfig.contact.phoneDigits}`,
     email: siteConfig.contact.email,
     image: `${siteConfig.url}${siteConfig.ogImage}`,
+    priceRange: "$$",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Praia de Barra Grande",
@@ -121,10 +129,24 @@ export default function RootLayout({
       { "@type": "LocationFeatureSpecification", name: "Área Gourmet com Churrasqueira", value: true },
       { "@type": "LocationFeatureSpecification", name: "Ar-condicionado", value: true },
       { "@type": "LocationFeatureSpecification", name: "Estacionamento privativo para 5 carros", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Wi-Fi Fibra Óptica", value: true },
       { "@type": "LocationFeatureSpecification", name: "Capacidade para até 10 pessoas", value: true },
       { "@type": "LocationFeatureSpecification", name: "800m da praia", value: true },
     ],
+  }
+
+  // Schema.org Structured Data: FAQPage para Rich Snippets
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: siteConfig.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   }
 
   return (
@@ -132,7 +154,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(lodgingSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="overflow-x-hidden min-h-screen bg-background text-foreground selection:bg-secondary/30">
