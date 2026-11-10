@@ -7,28 +7,28 @@ import { TestimonialCard } from "@/components/molecules/testimonial-card"
 const testimonials = [
   {
     id: 1,
-    imageSrc: "/whatsapp-testimonial.png",
+    imageSrc: "/whatsapp-testimonial.webp",
     imageAlt: "Depoimento de cliente satisfeito no WhatsApp elogiando a hospedagem no Ricca Ville Chalé",
     clientName: "Cliente Satisfeito",
     platform: "WhatsApp",
   },
   {
     id: 2,
-    imageSrc: "/instagram-testimonial.png",
+    imageSrc: "/instagram-testimonial.webp",
     imageAlt: "Avaliação positiva no Instagram sobre a experiência no chalé em Barra Grande",
     clientName: "Hóspede Feliz",
     platform: "Instagram",
   },
   {
     id: 3,
-    imageSrc: "/whatsapp-review-screenshot.png",
+    imageSrc: "/whatsapp-review-screenshot.webp",
     imageAlt: "Review detalhado no WhatsApp com feedback de família sobre a piscina e lazer",
     clientName: "Família Contente",
     platform: "WhatsApp",
   },
   {
     id: 4,
-    imageSrc: "/social-media-testimonial.png",
+    imageSrc: "/social-media-testimonial.webp",
     imageAlt: "Comentário positivo nas redes sociais sobre o chalé",
     clientName: "Casal Apaixonado",
     platform: "Instagram",
