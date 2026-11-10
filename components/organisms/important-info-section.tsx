@@ -55,7 +55,7 @@ export function ImportantInfoSection() {
   ]
 
   return (
-    <section id="regras" className="py-20 bg-background">
+    <section id="informacoes" className="py-20 bg-background scroll-mt-16">
       <div className="container mx-auto px-4">
         <SectionHeader
           subtitle="Informações Importantes"

@@ -39,7 +39,7 @@ export function CapacityRulesSection() {
   ]
 
   return (
-    <section id="capacidade" className="py-20 bg-muted/30">
+    <section id="regras" className="py-20 bg-muted/30 scroll-mt-16">
       <div className="container mx-auto px-4">
         <SectionHeader
           subtitle="Capacidade e Regras"
